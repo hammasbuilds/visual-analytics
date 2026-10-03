@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Embedding Atlas</title>
+<meta name="description" content="Three unpaired image-translation datasets in CLIP space, and how far apart their domains actually sit.">
+<style>
+  :root{
+    color-scheme:light;
+    --bg:#f7f7f5; --card:#fff; --bd:#e3e1db; --t1:#111110; --t2:#54534f; --t3:#86847d;
+    --grid:#ebe9e4;
+    --p1:#2a78d6; --p2:#eb6834; --p3:#1baf7a;
+  }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme=light]){
+    color-scheme:dark;
+    --bg:#0e0e0d; --card:#191918; --bd:#302f2a; --t1:#fff; --t2:#c5c4ba; --t3:#8d8b83;
+    --grid:#262521;
+    --p1:#3987e5; --p2:#d95926; --p3:#199e70;
+  }}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--t1);
+    font:15px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+  .w{max-width:1060px;margin:0 auto;padding:52px 16px 80px}
+  h1{font-size:clamp(26px,4.5vw,36px);letter-spacing:-.025em;margin:0 0 12px;line-height:1.12}
+  h2{font-size:12.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--t3);
+    margin:44px 0 12px;font-weight:650}
+  p{color:var(--t2);margin:0 0 14px;max-width:68ch}
+  .lede{font-size:16.5px}
+  a{color:var(--p1)}
+  figure{margin:16px 0 0;background:var(--card);border:1px solid var(--bd);
+    border-radius:13px;padding:14px}
+  figcaption{font-size:12.5px;color:var(--t3);margin-top:10px}
+  svg{display:block;width:100%;height:auto;touch-action:none}
+  .legend{display:flex;flex-wrap:wrap;gap:18px;font-size:13px;color:var(--t2);margin:4px 0 10px}
+  .legend b{font-weight:600;color:var(--t1)}
+  .key{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .ring{width:11px;height:11px;border-radius:50%;display:inline-block;background:transparent}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  th,td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--bd)}
+  th:first-child,td:first-child{text-align:left}
+  th{color:var(--t3);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:650}
+  td{font-variant-numeric:tabular-nums;color:var(--t2)}
+  .scroll{overflow-x:auto;background:var(--card);border:1px solid var(--bd);border-radius:12px}
+  .tip{position:fixed;pointer-events:none;opacity:0;transition:opacity .08s;z-index:9;
+    background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:7px;
+    box-shadow:0 8px 26px rgba(0,0,0,.16)}
+  .tip img{display:block;width:104px;height:104px;object-fit:cover;border-radius:6px}
+  .tip span{display:block;font-size:11.5px;color:var(--t2);margin-top:5px;text-align:center}
+  .foot{margin-top:48px;padding-top:16px;border-top:1px solid var(--bd);font-size:13px;color:var(--t3)}
+</style>
+</head>
+<body>
+<div class="w">
+
+  <h1>Three translation datasets,<br>as one picture</h1>
+  <p class="lede">
+    Three CycleGANs were trained to translate between domains: apple&nbsp;&harr;&nbsp;orange,
+    horse&nbsp;&harr;&nbsp;zebra, summer&nbsp;&harr;&nbsp;winter. This embeds 300 images from
+    each of the six domains with CLIP and asks a question those models cannot answer about
+    themselves: <em>how far apart are the two sides to begin with?</em>
+  </p>
+
+  <h2>How far apart the domains sit</h2>
+  <p>
+    Cosine distance between the two domain centroids, and how often an image is closer to
+    its own domain's centroid than to the other one. Both are computed on the raw
+    512-dimensional CLIP vectors, not on the 2D projection below &mdash; a projection
+    distorts distance, so measuring on it would be measuring the projection.
+  </p>
+  <div class="scroll"><table id="stats"></table></div>
+
+  <h2>The same 1,800 images in two dimensions</h2>
+  <p>
+    Colour is the dataset; a filled dot is the first domain and a ring is the second.
+    Hover any point to see the image. The layout comes from t-SNE over the first 50
+    principal components, which preserves neighbourhoods and not distances &mdash; read
+    clusters here, read the numbers above for how far apart anything is.
+  </p>
+  <div class="legend" id="legend"></div>
+  <figure>
+    <svg id="plot" viewBox="0 0 900 620" role="img"
+         aria-label="Two-dimensional projection of 1,800 CLIP image embeddings, coloured by dataset."></svg>
+    <figcaption id="cap"></figcaption>
+  </figure>
+
+  <h2>What this does and does not show</h2>
+  <p id="obs"></p>
+  <p>
+    <strong>Three pairs cannot establish a relationship.</strong> It is tempting to line
+    the separability column up against how well each CycleGAN scored and draw a
+    conclusion; with three points that would be a story, not a result. What is measured
+    here is the domain gap itself. Whether a smaller gap makes translation harder or
+    easier needs many more pairs than three.
+  </p>
+
+  <p class="foot">
+    CLIP ViT-B/32, 300 images per domain, seed 0, CPU only.
+    <a href="https://github.com/hammasbuilds/visual-analytics">Code and the full vectors</a>
+    &middot; <a href="https://vision-portfolio-woad.vercel.app">the models themselves</a>
+  </p>
+</div>
+
+<div class="tip" id="tip"><img id="tipimg" alt=""><span id="tiplab"></span></div>
+<script src="atlas.js"></script>
+<script>
+(function () {
+  var A = window.ATLAS, P = Object.keys(A.pairs);
+  var COL = ["var(--p1)", "var(--p2)", "var(--p3)"];
+  var nice = function (s) { return s.replace(/_yosemite/, "").replace(/2/, " → "); };
+
+  // ---- stats table ----------------------------------------------------------
+  var rows = P.map(function (k, i) {
+    var s = A.stats[k], d = A.pairs[k];
+    return "<tr><td><span class=dot style='background:" + COL[i] +
+      ";margin-right:7px'></span>" + nice(k) + "</td><td>" + d[0] + " / " + d[1] +
+      "</td><td>" + s.centroid_distance.toFixed(4) + "</td><td>" +
+      (s.centroid_accuracy * 100).toFixed(1) + "%</td></tr>";
+  }).join("");
+  document.getElementById("stats").innerHTML =
+    "<tr><th>dataset</th><th>domains</th><th>centroid distance</th>" +
+    "<th>assigned to own domain</th></tr>" + rows;
+
+  // ---- legend ---------------------------------------------------------------
+  document.getElementById("legend").innerHTML = P.map(function (k, i) {
+    var d = A.pairs[k];
+    return "<span class=key><span class=dot style='background:" + COL[i] + "'></span>" +
+      "<b>" + d[0] + "</b></span><span class=key><span class=ring style='border:2px solid " +
+      COL[i] + "'></span><b>" + d[1] + "</b></span>";
+  }).join("");
+
+  // ---- scatter --------------------------------------------------------------
+  var svg = document.getElementById("plot"), W = 900, H = 620, M = 18;
+  var tip = document.getElementById("tip"), ti = document.getElementById("tipimg"),
+      tl = document.getElementById("tiplab");
+  var ns = "http://www.w3.org/2000/svg";
+  var frag = document.createDocumentFragment();
+
+  A.points.forEach(function (p) {
+    var i = P.indexOf(p.p);
+    var c = document.createElementNS(ns, "circle");
+    c.setAttribute("cx", M + p.x * (W - 2 * M));
+    c.setAttribute("cy", M + (1 - p.y) * (H - 2 * M));
+    c.setAttribute("r", 3.6);
+    if (p.s === "A") {
+      c.setAttribute("fill", COL[i]);
+      c.setAttribute("fill-opacity", 0.8);
+      c.setAttribute("stroke", "none");
+    } else {                       // ring: identity never rests on colour alone
+      c.setAttribute("fill", "none");
+      c.setAttribute("stroke", COL[i]);
+      c.setAttribute("stroke-width", 1.5);
+      c.setAttribute("stroke-opacity", 0.9);
+    }
+    c.style.cursor = "pointer";
+    c.addEventListener("mouseenter", function (e) {
+      ti.src = "thumbs/" + p.t;
+      tl.textContent = p.d;
+      tip.style.opacity = 1;
+      var r = c.getBoundingClientRect();
+      tip.style.left = Math.max(8, Math.min(window.innerWidth - 130,
+        r.left - 52)) + "px";
+      tip.style.top = Math.max(8, r.top - 146) + "px";
+    });
+    c.addEventListener("mouseleave", function () { tip.style.opacity = 0; });
+    frag.appendChild(c);
+  });
+  svg.appendChild(frag);
+  document.getElementById("cap").textContent =
+    A.n + " images, " + A.per_domain + " per domain, embedded with " + A.model + ".";
+
+  // ---- the observation, computed rather than typed ---------------------------
+  var sorted = P.slice().sort(function (a, b) {
+    return A.stats[a].centroid_distance - A.stats[b].centroid_distance;
+  });
+  var lo = A.stats[sorted[0]], hi = A.stats[sorted[sorted.length - 1]];
+  document.getElementById("obs").innerHTML =
+    "The gap is not similar across the three. <strong>" + nice(sorted[sorted.length - 1]) +
+    "</strong> separates at " + (hi.centroid_accuracy * 100).toFixed(1) +
+    "% with a centroid distance of " + hi.centroid_distance.toFixed(4) + ", while <strong>" +
+    nice(sorted[0]) + "</strong> manages " + (lo.centroid_accuracy * 100).toFixed(1) +
+    "% at " + lo.centroid_distance.toFixed(4) + " &mdash; a gap " +
+    (hi.centroid_distance / lo.centroid_distance).toFixed(1) +
+    "× smaller. A summer photograph and a winter photograph of the same valley share " +
+    "most of their content; a horse and a zebra do not.";
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "model": "openai/clip-vit-base-patch32",
+  "n": 1800,
+  "per_domain": 300,
+  "seed": 0,
+  "stats": {
+    "apple2orange": {
+      "n_a": 300,
+      "n_b": 300,
+      "centroid_distance": 0.0865,
+      "spread_a": 0.1333,
+      "spread_b": 0.1368,
+      "centroid_accuracy": 0.9867
+    },
+    "horse2zebra": {
+      "n_a": 300,
+      "n_b": 300,
+      "centroid_distance": 0.1375,
+      "spread_a": 0.1507,
+      "spread_b": 0.1121,
+      "centroid_accuracy": 0.99
+    },
+    "summer2winter_yosemite": {
+      "n_a": 300,
+      "n_b": 300,
+      "centroid_distance": 0.0191,
+      "spread_a": 0.1277,
+      "spread_b": 0.1289,
+      "centroid_accuracy": 0.8367
+    }
+  }
+}

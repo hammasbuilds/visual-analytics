@@ -250,10 +250,17 @@
     g.appendChild(d);
   });
 
-  // direct labels for the four costliest no-gain intervals
+  // Direct labels for the four costliest no-gain intervals, each in its own lane.
+  // All four sit between 192 and 242 minutes at a gain of about zero, so one shared
+  // offset drew four strings on top of each other. Each gets a vertical lane and a
+  // leader line back to its dot.
+  var lanes = [-54, -34, -14, 22];
   under.slice().sort(function (a, b) { return b.min - a.min; }).slice(0, 4)
-    .forEach(function (c) {
-      var t = el("text", { x: x(c.min) - 10, y: y(c.rel) + 4, "text-anchor": "end",
+    .forEach(function (c, i) {
+      var px = x(c.min), py = y(c.rel), ly = py + lanes[i];
+      g.appendChild(el("line", { x1: px - 4, y1: py, x2: px - 12, y2: ly,
+        stroke: "var(--border)", "stroke-width": 1 }));
+      var t = el("text", { x: px - 16, y: ly + 4, "text-anchor": "end",
         fill: "var(--text-2)", "font-size": 11 });
       t.textContent = c.m + "  " + (c.rel >= 0 ? "+" : "") + c.rel.toFixed(3) + "%";
       g.appendChild(t);
