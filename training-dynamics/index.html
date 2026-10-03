@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Training Dynamics</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-0: #f6f6f4;
+    --surface-1: #fcfcfb;
+    --border:    #dedcd6;
+    --text-1:    #0b0b0b;
+    --text-2:    #52514e;
+    --text-3:    #7a7873;
+    --grid:      #e8e7e2;
+    --s1:        #2a78d6;
+    --s2:        #eb6834;
+    --crit:      #d03b3b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --surface-0: #121211;
+      --surface-1: #1a1a19;
+      --border:    #35352f;
+      --text-1:    #ffffff;
+      --text-2:    #c3c2b7;
+      --text-3:    #908e85;
+      --grid:      #2a2a26;
+      --s1:        #3987e5;
+      --s2:        #d95926;
+      --crit:      #d03b3b;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-0: #121211;
+    --surface-1: #1a1a19;
+    --border:    #35352f;
+    --text-1:    #ffffff;
+    --text-2:    #c3c2b7;
+    --text-3:    #908e85;
+    --grid:      #2a2a26;
+    --s1:        #3987e5;
+    --s2:        #d95926;
+    --crit:      #d03b3b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--surface-0); color: var(--text-1);
+    font: 15px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 48px 16px 72px; }
+  h1 { font-size: 28px; line-height: 1.2; margin: 0 0 10px; letter-spacing: -0.01em; }
+  h2 { font-size: 17px; margin: 40px 0 6px; letter-spacing: -0.005em; }
+  p  { margin: 0 0 14px; color: var(--text-2); max-width: 68ch; }
+  .lede { font-size: 16px; color: var(--text-2); max-width: 70ch; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em; }
+
+  .tiles { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin: 26px 0 8px; }
+  .tile { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .tile .n { font-size: 26px; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tile .l { font-size: 12.5px; color: var(--text-3); margin-top: 3px; }
+  .tile.flag .n { color: var(--crit); }
+
+  figure { margin: 18px 0 0; background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 16px 14px 10px; }
+  figcaption { font-size: 12.5px; color: var(--text-3); margin-top: 8px; }
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--text-2); margin: 2px 0 12px; }
+  .legend i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: 1px; }
+
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; margin-top: 10px; }
+  th, td { text-align: right; padding: 7px 9px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; white-space: normal; }
+  th { color: var(--text-3); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+  td { font-variant-numeric: tabular-nums; color: var(--text-2); }
+  td.k { color: var(--text-1); font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; }
+  tr.early td.k::after { content: " early"; color: var(--s2); font-family: inherit; font-size: 11px; }
+  .under { color: var(--s2); }
+  .neg { color: var(--crit); }
+  .scroll { overflow-x: auto; }
+
+  details { margin-top: 12px; }
+  summary { cursor: pointer; font-size: 13.5px; color: var(--text-2); }
+  .tip {
+    position: fixed; pointer-events: none; opacity: 0; transition: opacity .1s;
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 10px; font-size: 12.5px; color: var(--text-1); max-width: 260px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.14); z-index: 10;
+  }
+  .tip b { font-family: ui-monospace, Menlo, monospace; }
+  .foot { margin-top: 44px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-3); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Training dynamics</h1>
+  <p class="lede">
+    Eighteen computer-vision models were trained in one queue on a single power-capped
+    16&nbsp;GB Quadro RTX 5000. The queue stopped each run at fixed checkpoints, measured a
+    validation metric, and recorded what the interval cost. This page is that record:
+    every number was written by the runner while the run happened.
+  </p>
+
+  <div class="tiles" id="tiles"></div>
+
+  <h2>What an interval bought, against what it cost</h2>
+  <p>
+    Each dot is one training interval. Horizontal position is the wall-clock time it took;
+    vertical position is the change in its validation metric, relative to where the metric
+    already stood. The line at 0.2% is the threshold below which a change is invisible in
+    the output image &mdash; on a PSNR of 27&nbsp;dB it is 0.054&nbsp;dB.
+  </p>
+  <div class="legend">
+    <span><i style="background:var(--s1)"></i>gained more than 0.2%</span>
+    <span><i style="background:var(--s2)"></i>under the 0.2% floor</span>
+  </div>
+  <figure>
+    <svg id="chart" viewBox="0 0 900 430" role="img"
+         aria-label="Scatter plot of relative metric gain against interval cost in minutes."></svg>
+    <figcaption id="cap"></figcaption>
+  </figure>
+
+  <h2>The intervals that bought nothing</h2>
+  <p>
+    Four runs spent their final interval going nowhere or backwards. These are not
+    rounding errors &mdash; two models ended measurably <em>worse</em> than a checkpoint they
+    had already passed, so the published weights come from earlier in the run.
+  </p>
+  <div class="scroll"><table id="waste"></table></div>
+
+  <h2>Every model</h2>
+  <p>
+    <code>reached</code> is where the run actually stopped; <code>ceiling</code> is the
+    budget it was allowed. A run marked <span class="under">early</span> stopped because
+    its metric flattened, not because it ran out of budget.
+  </p>
+  <div class="scroll"><table id="models"></table></div>
+
+  <details>
+    <summary>All intervals, as a table</summary>
+    <div class="scroll"><table id="all"></table></div>
+  </details>
+
+  <p class="foot">
+    Source: the queue runner's log and state file, parsed without modification.
+    Intervals whose metric was unavailable on both sides of the boundary are excluded
+    from the chart and the interval table, which is why the interval count is lower than
+    the number of intervals run.
+  </p>
+</div>
+
+<div class="tip" id="tip"></div>
+<script src="data.js"></script>
+<script>
+(function () {
+  var R = window.RUNS, C = R.chunks.slice(), M = R.models;
+  var FLOOR = 0.2;
+  var under = C.filter(function (c) { return c.rel < FLOOR; });
+  var underH = under.reduce(function (a, c) { return a + c.min; }, 0) / 60;
+
+  // ---- stat tiles -----------------------------------------------------------
+  var tiles = [
+    { n: R.totals.models, l: "models trained" },
+    { n: R.totals.hours + " h", l: "GPU time, all runs" },
+    { n: C.length, l: "measured intervals" },
+    { n: under.length + " of " + C.length, l: "intervals under the floor", flag: true },
+    { n: underH.toFixed(1) + " h", l: "spent under the floor", flag: true },
+    { n: Math.round(underH / R.totals.hours * 100) + "%", l: "of all GPU time", flag: true }
+  ];
+  document.getElementById("tiles").innerHTML = tiles.map(function (t) {
+    return '<div class="tile' + (t.flag ? ' flag' : '') + '"><div class="n">' + t.n +
+           '</div><div class="l">' + t.l + "</div></div>";
+  }).join("");
+
+  // ---- scatter --------------------------------------------------------------
+  var svg = document.getElementById("chart"), tip = document.getElementById("tip");
+  var W = 900, H = 430, L = 54, Rr = 14, T = 14, B = 44;
+  var maxMin = Math.max.apply(null, C.map(function (c) { return c.min; }));
+  var maxRel = Math.max.apply(null, C.map(function (c) { return c.rel; }));
+  var minRel = Math.min.apply(null, C.map(function (c) { return c.rel; }));
+  var xMax = Math.ceil(maxMin / 50) * 50, yTop = Math.ceil(maxRel), yBot = Math.min(-0.5, Math.floor(minRel * 2) / 2);
+  var x = function (v) { return L + (v / xMax) * (W - L - Rr); };
+  var y = function (v) { return T + (1 - (v - yBot) / (yTop - yBot)) * (H - T - B); };
+  var el = function (t, a) {
+    var n = document.createElementNS("http://www.w3.org/2000/svg", t);
+    for (var k in a) n.setAttribute(k, a[k]);
+    return n;
+  };
+  var g = document.createDocumentFragment();
+
+  // y grid + ticks
+  var yticks = [];
+  for (var v = 0; v <= yTop; v += (yTop > 4 ? 2 : 1)) yticks.push(v);
+  if (yBot < 0) yticks.unshift(Math.ceil(yBot));
+  yticks.forEach(function (v) {
+    g.appendChild(el("line", { x1: L, x2: W - Rr, y1: y(v), y2: y(v),
+      stroke: "var(--grid)", "stroke-width": 1 }));
+    var t = el("text", { x: L - 8, y: y(v) + 4, "text-anchor": "end",
+      fill: "var(--text-3)", "font-size": 11 });
+    t.textContent = v + "%";
+    g.appendChild(t);
+  });
+  // x ticks
+  for (var xv = 0; xv <= xMax; xv += 50) {
+    var tx = el("text", { x: x(xv), y: H - B + 18, "text-anchor": "middle",
+      fill: "var(--text-3)", "font-size": 11 });
+    tx.textContent = xv;
+    g.appendChild(tx);
+  }
+  var xl = el("text", { x: (L + W - Rr) / 2, y: H - 6, "text-anchor": "middle",
+    fill: "var(--text-3)", "font-size": 11.5 });
+  xl.textContent = "minutes the interval took";
+  g.appendChild(xl);
+
+  // zero line, then the floor line on top
+  g.appendChild(el("line", { x1: L, x2: W - Rr, y1: y(0), y2: y(0),
+    stroke: "var(--text-3)", "stroke-width": 1 }));
+  g.appendChild(el("line", { x1: L, x2: W - Rr, y1: y(FLOOR), y2: y(FLOOR),
+    stroke: "var(--s2)", "stroke-width": 2, "stroke-dasharray": "5 4" }));
+  var fl = el("text", { x: W - Rr, y: y(FLOOR) - 7, "text-anchor": "end",
+    fill: "var(--s2)", "font-size": 11.5, "font-weight": 600 });
+  fl.textContent = "0.2% floor";
+  g.appendChild(fl);
+
+  // dots: 2px surface ring keeps overlapping marks separable
+  C.sort(function (a, b) { return b.min - a.min; }).forEach(function (c) {
+    var col = c.rel < FLOOR ? "var(--s2)" : "var(--s1)";
+    var d = el("circle", { cx: x(c.min), cy: y(Math.max(c.rel, yBot)), r: 5.5, fill: col,
+      stroke: "var(--surface-1)", "stroke-width": 2, tabindex: 0 });
+    d.style.cursor = "pointer";
+    var txt = c.m + " at " + c.at + " " + c.u + "<br>" +
+      "<b>" + (c.rel >= 0 ? "+" : "") + c.rel.toFixed(3) + "%</b> in " + c.min + " min<br>" +
+      "metric " + c.before + " → " + c.after;
+    function show(e) {
+      tip.innerHTML = txt;
+      tip.style.opacity = 1;
+      var r = d.getBoundingClientRect();
+      var tw = tip.offsetWidth, px = r.left + r.width / 2 - tw / 2;
+      tip.style.left = Math.max(8, Math.min(window.innerWidth - tw - 8, px)) + "px";
+      tip.style.top = (r.top - tip.offsetHeight - 10) + "px";
+    }
+    d.addEventListener("mouseenter", show);
+    d.addEventListener("focus", show);
+    d.addEventListener("mouseleave", function () { tip.style.opacity = 0; });
+    d.addEventListener("blur", function () { tip.style.opacity = 0; });
+    g.appendChild(d);
+  });
+
+  // direct labels for the four costliest no-gain intervals
+  under.slice().sort(function (a, b) { return b.min - a.min; }).slice(0, 4)
+    .forEach(function (c) {
+      var t = el("text", { x: x(c.min) - 10, y: y(c.rel) + 4, "text-anchor": "end",
+        fill: "var(--text-2)", "font-size": 11 });
+      t.textContent = c.m + "  " + (c.rel >= 0 ? "+" : "") + c.rel.toFixed(3) + "%";
+      g.appendChild(t);
+    });
+
+  svg.appendChild(g);
+  document.getElementById("cap").textContent =
+    C.length + " intervals across " + R.totals.models + " models. " + under.length +
+    " of them, costing " + underH.toFixed(1) + " hours, changed the metric by less than 0.2%.";
+
+  // ---- tables ---------------------------------------------------------------
+  function cls(rel) { return rel < 0 ? "neg" : (rel < FLOOR ? "under" : ""); }
+  function pct(rel) { return (rel >= 0 ? "+" : "") + rel.toFixed(3) + "%"; }
+
+  var worst = C.slice().filter(function (c) { return c.rel < FLOOR; })
+    .sort(function (a, b) { return b.min - a.min; }).slice(0, 6);
+  document.getElementById("waste").innerHTML =
+    "<tr><th>model</th><th>interval ended at</th><th>minutes</th><th>metric change</th>" +
+    "<th>metric before</th><th>after</th></tr>" +
+    worst.map(function (c) {
+      return "<tr><td class='k'>" + c.m + "</td><td>" + c.at + " " + c.u + "</td><td>" +
+        c.min + "</td><td class='" + cls(c.rel) + "'>" + pct(c.rel) + "</td><td>" +
+        c.before + "</td><td>" + c.after + "</td></tr>";
+    }).join("");
+
+  document.getElementById("models").innerHTML =
+    "<tr><th>model</th><th>reached</th><th>ceiling</th><th>hours</th><th>intervals</th>" +
+    "<th>final metric</th><th>restarts</th></tr>" +
+    M.map(function (m) {
+      return "<tr class='" + (m.early ? "early" : "") + "'><td class='k'>" + m.id +
+        "</td><td>" + m.reached + "</td><td>" + m.ceiling + " " + m.unit + "</td><td>" +
+        m.hours.toFixed(1) + "</td><td>" + m.chunks + "</td><td>" +
+        (m.metric === null ? "—" : m.metric) + "</td><td>" +
+        (m.fails || "") + "</td></tr>";
+    }).join("");
+
+  document.getElementById("all").innerHTML =
+    "<tr><th>model</th><th>at</th><th>minutes</th><th>change</th><th>before</th><th>after</th></tr>" +
+    C.slice().sort(function (a, b) {
+      return a.m === b.m ? a.at - b.at : (a.m < b.m ? -1 : 1);
+    }).map(function (c) {
+      return "<tr><td class='k'>" + c.m + "</td><td>" + c.at + "</td><td>" + c.min +
+        "</td><td class='" + cls(c.rel) + "'>" + pct(c.rel) + "</td><td>" + c.before +
+        "</td><td>" + c.after + "</td></tr>";
+    }).join("");
+})();
+</script>
+</body>
+</html>

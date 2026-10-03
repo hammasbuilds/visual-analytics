@@ -1,0 +1,1239 @@
+{
+ "generated_from": "logs/_queue_runner.log + tools/_queue_state.json",
+ "n_models": 18,
+ "n_chunks": 83,
+ "total_minutes": 6404.6,
+ "models": {
+  "cloud_spagan": {
+   "id": "cloud_spagan",
+   "label": "SpA-GAN cloud removal",
+   "unit": "epochs",
+   "ceiling": 60,
+   "chunk_size": 10,
+   "reached": 60,
+   "done": true,
+   "stopped_early": false,
+   "metric": 23.966581378005095,
+   "minutes": 409.3,
+   "n_chunks": 7,
+   "chunks": [
+    {
+     "ts": "2026-09-27 05:03:23",
+     "model": "cloud_spagan",
+     "at": 5,
+     "unit": "epoch",
+     "before": null,
+     "after": null,
+     "minutes": 13.9,
+     "min_per_unit": 2.78
+    },
+    {
+     "ts": "2026-09-27 20:10:56",
+     "model": "cloud_spagan",
+     "at": 20,
+     "unit": "epoch",
+     "before": 20.5804993995838,
+     "after": 21.866077097900423,
+     "minutes": 16.5,
+     "min_per_unit": 3.3
+    },
+    {
+     "ts": "2026-09-27 20:27:34",
+     "model": "cloud_spagan",
+     "at": 25,
+     "unit": "epoch",
+     "before": 21.866077097900423,
+     "after": 22.143321838265845,
+     "minutes": 16.6,
+     "min_per_unit": 3.33
+    },
+    {
+     "ts": "2026-09-27 20:44:17",
+     "model": "cloud_spagan",
+     "at": 30,
+     "unit": "epoch",
+     "before": 22.143321838265845,
+     "after": 22.335597124585142,
+     "minutes": 16.7,
+     "min_per_unit": 3.34
+    },
+    {
+     "ts": "2026-09-27 21:01:05",
+     "model": "cloud_spagan",
+     "at": 35,
+     "unit": "epoch",
+     "before": 22.335597124585142,
+     "after": 22.47476877049164,
+     "minutes": 16.8,
+     "min_per_unit": 3.36
+    },
+    {
+     "ts": "2026-09-28 06:36:43",
+     "model": "cloud_spagan",
+     "at": 50,
+     "unit": "epoch",
+     "before": 22.611250641067116,
+     "after": 23.527298228268453,
+     "minutes": 150.6,
+     "min_per_unit": 15.06
+    },
+    {
+     "ts": "2026-09-28 09:34:55",
+     "model": "cloud_spagan",
+     "at": 60,
+     "unit": "epoch",
+     "before": 23.527298228268453,
+     "after": 23.966581378005095,
+     "minutes": 178.2,
+     "min_per_unit": 17.82
+    }
+   ],
+   "stops": [],
+   "floor_hits": [],
+   "failures": 3
+  },
+  "matting_u2net": {
+   "id": "matting_u2net",
+   "label": "U2NET matting",
+   "unit": "epochs",
+   "ceiling": 100,
+   "chunk_size": 10,
+   "reached": 100,
+   "done": true,
+   "stopped_early": false,
+   "metric": 0.9642372978559584,
+   "minutes": 529.6,
+   "n_chunks": 12,
+   "chunks": [
+    {
+     "ts": "2026-09-27 15:18:49",
+     "model": "matting_u2net",
+     "at": 5,
+     "unit": "epoch",
+     "before": 0.8591547707844482,
+     "after": 0.9438627414984997,
+     "minutes": 10.3,
+     "min_per_unit": 2.05
+    },
+    {
+     "ts": "2026-09-27 15:28:34",
+     "model": "matting_u2net",
+     "at": 10,
+     "unit": "epoch",
+     "before": 0.9438627414984997,
+     "after": 0.9441428206821104,
+     "minutes": 9.6,
+     "min_per_unit": 1.92
+    },
+    {
+     "ts": "2026-09-27 15:37:48",
+     "model": "matting_u2net",
+     "at": 15,
+     "unit": "epoch",
+     "before": 0.9441428206821104,
+     "after": 0.944155130385046,
+     "minutes": 9.2,
+     "min_per_unit": 1.85
+    },
+    {
+     "ts": "2026-09-27 15:47:42",
+     "model": "matting_u2net",
+     "at": 20,
+     "unit": "epoch",
+     "before": 0.944155130385046,
+     "after": 0.9441722084706219,
+     "minutes": 9.9,
+     "min_per_unit": 1.98
+    },
+    {
+     "ts": "2026-09-27 21:35:26",
+     "model": "matting_u2net",
+     "at": 30,
+     "unit": "epoch",
+     "before": 0.9441722084706219,
+     "after": 0.956700907703456,
+     "minutes": 17.1,
+     "min_per_unit": 1.71
+    },
+    {
+     "ts": "2026-09-27 21:52:21",
+     "model": "matting_u2net",
+     "at": 40,
+     "unit": "epoch",
+     "before": 0.956700907703456,
+     "after": 0.9591703085489709,
+     "minutes": 16.9,
+     "min_per_unit": 1.69
+    },
+    {
+     "ts": "2026-09-27 22:09:05",
+     "model": "matting_u2net",
+     "at": 50,
+     "unit": "epoch",
+     "before": 0.9591703085489709,
+     "after": 0.9600884436520433,
+     "minutes": 16.7,
+     "min_per_unit": 1.67
+    },
+    {
+     "ts": "2026-09-27 22:25:54",
+     "model": "matting_u2net",
+     "at": 60,
+     "unit": "epoch",
+     "before": 0.9600884436520433,
+     "after": 0.9608971690300309,
+     "minutes": 16.8,
+     "min_per_unit": 1.68
+    },
+    {
+     "ts": "2026-09-27 22:42:41",
+     "model": "matting_u2net",
+     "at": 70,
+     "unit": "epoch",
+     "before": 0.9608971690300309,
+     "after": 0.9627475577537448,
+     "minutes": 16.8,
+     "min_per_unit": 1.68
+    },
+    {
+     "ts": "2026-09-28 11:33:31",
+     "model": "matting_u2net",
+     "at": 80,
+     "unit": "epoch",
+     "before": 0.9627475577537448,
+     "after": 0.9640993711247037,
+     "minutes": 118.6,
+     "min_per_unit": 11.86
+    },
+    {
+     "ts": "2026-09-28 13:46:38",
+     "model": "matting_u2net",
+     "at": 90,
+     "unit": "epoch",
+     "before": 0.9640993711247037,
+     "after": 0.9642372978559584,
+     "minutes": 133.1,
+     "min_per_unit": 13.31
+    },
+    {
+     "ts": "2026-09-28 16:21:13",
+     "model": "matting_u2net",
+     "at": 100,
+     "unit": "epoch",
+     "before": 0.9642372978559584,
+     "after": 0.9624816574733855,
+     "minutes": 154.6,
+     "min_per_unit": 15.46
+    }
+   ],
+   "stops": [
+    {
+     "ts": "2026-09-27 15:47:42",
+     "model": "matting_u2net",
+     "reason": "flat for 3 chunks (+0.0000); converged, best kept. Remaining budget freed."
+    },
+    {
+     "ts": "2026-09-27 15:47:42",
+     "model": "matting_u2net",
+     "reason": "flat for 3 chunks (+0.0000); converged, best kept. Remaining budget freed."
+    },
+    {
+     "ts": "2026-09-27 22:42:41",
+     "model": "matting_u2net",
+     "reason": "flat for 4 chunks (+0.0019); converged, best kept. Remaining budget freed."
+    }
+   ],
+   "floor_hits": [],
+   "failures": 1
+  },
+  "sr_msrgan": {
+   "id": "sr_msrgan",
+   "label": "MSRGAN (SRGAN)",
+   "unit": "steps",
+   "ceiling": 20000,
+   "chunk_size": 5000,
+   "reached": 20000,
+   "done": true,
+   "stopped_early": false,
+   "metric": 27.574172419749143,
+   "minutes": 602.7,
+   "n_chunks": 4,
+   "chunks": [
+    {
+     "ts": "2026-09-28 02:09:19",
+     "model": "sr_msrgan",
+     "at": 5000,
+     "unit": "step",
+     "before": null,
+     "after": 27.556523728380178,
+     "minutes": 206.6,
+     "min_per_unit": 0.04
+    },
+    {
+     "ts": "2026-09-28 19:31:22",
+     "model": "sr_msrgan",
+     "at": 10000,
+     "unit": "step",
+     "before": 27.556523728380178,
+     "after": 27.560591341910428,
+     "minutes": 190.1,
+     "min_per_unit": 0.04
+    },
+    {
+     "ts": "2026-09-29 15:38:12",
+     "model": "sr_msrgan",
+     "at": 19080,
+     "unit": "step",
+     "before": 27.560591341910428,
+     "after": 27.574172419749143,
+     "minutes": 186.3,
+     "min_per_unit": 0.04
+    },
+    {
+     "ts": "2026-09-29 18:19:32",
+     "model": "sr_msrgan",
+     "at": 20000,
+     "unit": "step",
+     "before": 27.574172419749143,
+     "after": 27.574172419749143,
+     "minutes": 19.7,
+     "min_per_unit": 0.0
+    }
+   ],
+   "stops": [],
+   "floor_hits": [],
+   "failures": 3
+  },
+  "sr_realesrnet": {
+   "id": "sr_realesrnet",
+   "label": "RealESRNet",
+   "unit": "steps",
+   "ceiling": 20000,
+   "chunk_size": 5000,
+   "reached": 20000,
+   "done": true,
+   "stopped_early": false,
+   "metric": 27.432164179498923,
+   "minutes": 580.2,
+   "n_chunks": 4,
+   "chunks": [
+    {
+     "ts": "2026-09-29 20:49:50",
+     "model": "sr_realesrnet",
+     "at": 9500,
+     "unit": "step",
+     "before": 27.574172419749143,
+     "after": 27.4189955372773,
+     "minutes": 150.3,
+     "min_per_unit": 0.03
+    },
+    {
+     "ts": "2026-09-30 01:21:04",
+     "model": "sr_realesrnet",
+     "at": 14675,
+     "unit": "step",
+     "before": 27.4189955372773,
+     "after": 27.432164179498923,
+     "minutes": 192.1,
+     "min_per_unit": 0.04
+    },
+    {
+     "ts": "2026-09-30 04:24:55",
+     "model": "sr_realesrnet",
+     "at": 19675,
+     "unit": "step",
+     "before": 27.432164179498923,
+     "after": 27.432164179498923,
+     "minutes": 182.8,
+     "min_per_unit": 0.04
+    },
+    {
+     "ts": "2026-09-30 05:19:55",
+     "model": "sr_realesrnet",
+     "at": 20000,
+     "unit": "step",
+     "before": 27.432164179498923,
+     "after": 27.432164179498923,
+     "minutes": 55.0,
+     "min_per_unit": 0.01
+    }
+   ],
+   "stops": [],
+   "floor_hits": [],
+   "failures": 1
+  },
+  "sr_realesrgan": {
+   "id": "sr_realesrgan",
+   "label": "Real-ESRGAN anime_6B",
+   "unit": "steps",
+   "ceiling": 20000,
+   "chunk_size": 5000,
+   "reached": 20000,
+   "done": true,
+   "stopped_early": false,
+   "metric": 27.351886234323644,
+   "minutes": 742.6,
+   "n_chunks": 4,
+   "chunks": [
+    {
+     "ts": "2026-09-30 07:57:43",
+     "model": "sr_realesrgan",
+     "at": 5000,
+     "unit": "step",
+     "before": null,
+     "after": 27.295218599480968,
+     "minutes": 157.8,
+     "min_per_unit": 0.03
+    },
+    {
+     "ts": "2026-09-30 11:47:05",
+     "model": "sr_realesrgan",
+     "at": 11450,
+     "unit": "step",
+     "before": 27.295218599480968,
+     "after": 27.33879511453779,
+     "minutes": 186.1,
+     "min_per_unit": 0.04
+    },
+    {
+     "ts": "2026-09-30 14:23:34",
+     "model": "sr_realesrgan",
+     "at": 16450,
+     "unit": "step",
+     "before": 27.33879511453779,
+     "after": 27.350561129684856,
+     "minutes": 156.5,
+     "min_per_unit": 0.03
+    },
+    {
+     "ts": "2026-09-30 18:25:49",
+     "model": "sr_realesrgan",
+     "at": 20000,
+     "unit": "step",
+     "before": 27.350561129684856,
+     "after": 27.351886234323644,
+     "minutes": 242.2,
+     "min_per_unit": 0.05
+    }
+   ],
+   "stops": [],
+   "floor_hits": [],
+   "failures": 1
+  },
+  "sr_esrgan": {
+   "id": "sr_esrgan",
+   "label": "ESRGAN",
+   "unit": "steps",
+   "ceiling": 20000,
+   "chunk_size": 5000,
+   "reached": 20000,
+   "done": true,
+   "stopped_early": false,
+   "metric": 27.805082391285023,
+   "minutes": 700.3,
+   "n_chunks": 3,
+   "chunks": [
+    {
+     "ts": "2026-10-02 04:33:57",
+     "model": "sr_esrgan",
+     "at": 12650,
+     "unit": "step",
+     "before": null,
+     "after": 27.786983630516662,
+     "minutes": 278.1,
+     "min_per_unit": 0.06
+    },
+    {
+     "ts": "2026-10-02 08:03:03",
+     "model": "sr_esrgan",
+     "at": 17650,
+     "unit": "step",
+     "before": 27.786983630516662,
+     "after": 27.805082391285023,
+     "minutes": 209.0,
+     "min_per_unit": 0.04
+    },
+    {
+     "ts": "2026-10-02 11:36:24",
+     "model": "sr_esrgan",
+     "at": 20000,
+     "unit": "step",
+     "before": 27.805082391285023,
+     "after": 27.805082391285023,
+     "minutes": 213.2,
+     "min_per_unit": 0.04
+    }
+   ],
+   "stops": [
+    {
+     "ts": "2026-10-02 11:36:30",
+     "model": "sr_esrgan",
+     "reason": "2 chunks under the floor; best kept, 0 steps of budget freed"
+    }
+   ],
+   "floor_hits": [
+    {
+     "ts": "2026-10-02 08:03:09",
+     "model": "sr_esrgan",
+     "gain_pct": 0.065,
+     "floor_pct": 0.2,
+     "n": 1,
+     "of": 2
+    },
+    {
+     "ts": "2026-10-02 11:36:30",
+     "model": "sr_esrgan",
+     "gain_pct": 0.0,
+     "floor_pct": 0.2,
+     "n": 2,
+     "of": 2
+    }
+   ],
+   "failures": 1
+  },
+  "text2image": {
+   "id": "text2image",
+   "label": "tiny-SD (Pokemon)",
+   "unit": "steps",
+   "ceiling": 15000,
+   "chunk_size": 2500,
+   "reached": 12600,
+   "done": true,
+   "stopped_early": true,
+   "metric": -0.05194055009633303,
+   "minutes": 251.0,
+   "n_chunks": 4,
+   "chunks": [
+    {
+     "ts": "2026-09-30 20:06:14",
+     "model": "text2image",
+     "at": 5100,
+     "unit": "step",
+     "before": null,
+     "after": null,
+     "minutes": 98.5,
+     "min_per_unit": 0.02
+    },
+    {
+     "ts": "2026-10-01 00:57:30",
+     "model": "text2image",
+     "at": 7600,
+     "unit": "step",
+     "before": -0.06112166345701553,
+     "after": -0.05194055009633303,
+     "minutes": 57.2,
+     "min_per_unit": 0.02
+    },
+    {
+     "ts": "2026-10-01 01:46:11",
+     "model": "text2image",
+     "at": 10100,
+     "unit": "step",
+     "before": -0.05194055009633303,
+     "after": -0.053551865566987544,
+     "minutes": 48.6,
+     "min_per_unit": 0.02
+    },
+    {
+     "ts": "2026-10-01 02:32:53",
+     "model": "text2image",
+     "at": 12600,
+     "unit": "step",
+     "before": -0.053551865566987544,
+     "after": -0.05482854292495176,
+     "minutes": 46.7,
+     "min_per_unit": 0.02
+    }
+   ],
+   "stops": [
+    {
+     "ts": "2026-10-01 02:32:53",
+     "model": "text2image",
+     "reason": "2 chunks under the floor; best kept, 2400 steps of budget freed"
+    }
+   ],
+   "floor_hits": [
+    {
+     "ts": "2026-10-01 01:46:11",
+     "model": "text2image",
+     "gain_pct": -3.102,
+     "floor_pct": 0.2,
+     "n": 1,
+     "of": 2
+    },
+    {
+     "ts": "2026-10-01 02:32:53",
+     "model": "text2image",
+     "gain_pct": -2.384,
+     "floor_pct": 0.2,
+     "n": 2,
+     "of": 2
+    }
+   ],
+   "failures": 4
+  },
+  "cut_h2z": {
+   "id": "cut_h2z",
+   "label": "CUT horse<->zebra",
+   "unit": "epochs",
+   "ceiling": 100,
+   "chunk_size": 100,
+   "reached": 100,
+   "done": true,
+   "stopped_early": false,
+   "metric": null,
+   "minutes": 606.3,
+   "n_chunks": 1,
+   "chunks": [
+    {
+     "ts": "2026-09-29 09:11:45",
+     "model": "cut_h2z",
+     "at": 100,
+     "unit": "epoch",
+     "before": null,
+     "after": null,
+     "minutes": 606.3,
+     "min_per_unit": 6.06
+    }
+   ],
+   "stops": [],
+   "floor_hits": [],
+   "failures": 0
+  },
+  "cyclegan_a2o": {
+   "id": "cyclegan_a2o",
+   "label": "CycleGAN apple<->orange",
+   "unit": "epochs",
+   "ceiling": 100,
+   "chunk_size": 10,
+   "reached": 100,
+   "done": true,
+   "stopped_early": false,
+   "metric": -0.09579118825495243,
+   "minutes": 620.5,
+   "n_chunks": 10,
+   "chunks": [
+    {
+     "ts": "2026-10-01 03:28:05",
+     "model": "cyclegan_a2o",
+     "at": 10,
+     "unit": "epoch",
+     "before": null,
+     "after": -0.10746005245794853,
+     "minutes": 55.2,
+     "min_per_unit": 5.52
+    },
+    {
+     "ts": "2026-10-01 04:23:04",
+     "model": "cyclegan_a2o",
+     "at": 20,
+     "unit": "epoch",
+     "before": -0.10746005245794853,
+     "after": -0.10117450933903456,
+     "minutes": 55.0,
+     "min_per_unit": 5.5
+    },
+    {
+     "ts": "2026-10-01 05:25:24",
+     "model": "cyclegan_a2o",
+     "at": 30,
+     "unit": "epoch",
+     "before": -0.10117450933903456,
+     "after": -0.0998379656424125,
+     "minutes": 62.3,
+     "min_per_unit": 6.23
+    },
+    {
+     "ts": "2026-10-01 06:27:25",
+     "model": "cyclegan_a2o",
+     "at": 40,
+     "unit": "epoch",
+     "before": -0.0998379656424125,
+     "after": -0.09914060523733496,
+     "minutes": 62.0,
+     "min_per_unit": 6.2
+    },
+    {
+     "ts": "2026-10-01 07:26:35",
+     "model": "cyclegan_a2o",
+     "at": 50,
+     "unit": "epoch",
+     "before": -0.09914060523733496,
+     "after": -0.0968308936804533,
+     "minutes": 59.2,
+     "min_per_unit": 5.92
+    },
+    {
+     "ts": "2026-10-01 08:26:12",
+     "model": "cyclegan_a2o",
+     "at": 60,
+     "unit": "epoch",
+     "before": -0.0968308936804533,
+     "after": -0.09673698544502259,
+     "minutes": 59.6,
+     "min_per_unit": 5.96
+    },
+    {
+     "ts": "2026-10-01 09:25:42",
+     "model": "cyclegan_a2o",
+     "at": 70,
+     "unit": "epoch",
+     "before": -0.09673698544502259,
+     "after": -0.09554854892194271,
+     "minutes": 59.5,
+     "min_per_unit": 5.95
+    },
+    {
+     "ts": "2026-10-01 10:26:12",
+     "model": "cyclegan_a2o",
+     "at": 80,
+     "unit": "epoch",
+     "before": -0.09554854892194271,
+     "after": -0.09682483940074842,
+     "minutes": 60.5,
+     "min_per_unit": 6.05
+    },
+    {
+     "ts": "2026-10-01 11:36:34",
+     "model": "cyclegan_a2o",
+     "at": 90,
+     "unit": "epoch",
+     "before": -0.09682483940074842,
+     "after": -0.09618176001434525,
+     "minutes": 70.4,
+     "min_per_unit": 7.04
+    },
+    {
+     "ts": "2026-10-01 12:53:20",
+     "model": "cyclegan_a2o",
+     "at": 100,
+     "unit": "epoch",
+     "before": -0.09618176001434525,
+     "after": -0.09579118825495243,
+     "minutes": 76.8,
+     "min_per_unit": 7.68
+    }
+   ],
+   "stops": [],
+   "floor_hits": [
+    {
+     "ts": "2026-10-01 08:26:12",
+     "model": "cyclegan_a2o",
+     "gain_pct": 0.097,
+     "floor_pct": 0.2,
+     "n": 1,
+     "of": 3
+    },
+    {
+     "ts": "2026-10-01 10:26:12",
+     "model": "cyclegan_a2o",
+     "gain_pct": -1.336,
+     "floor_pct": 0.2,
+     "n": 1,
+     "of": 3
+    }
+   ],
+   "failures": 1
+  },
+  "cyclegan_s2w": {
+   "id": "cyclegan_s2w",
+   "label": "CycleGAN summer<->winter",
+   "unit": "epochs",
+   "ceiling": 100,
+   "chunk_size": 10,
+   "reached": 30,
+   "done": true,
+   "stopped_early": true,
+   "metric": -0.1049233422925075,
+   "minutes": 460.5,
+   "n_chunks": 3,
+   "chunks": [
+    {
+     "ts": "2026-09-30 21:54:35",
+     "model": "cyclegan_s2w",
+     "at": 10,
+     "unit": "epoch",
+     "before": null,
+     "after": -0.1298798367381096,
+     "minutes": 85.9,
+     "min_per_unit": 8.59
+    },
+    {
+     "ts": "2026-10-01 14:20:00",
+     "model": "cyclegan_s2w",
+     "at": 20,
+     "unit": "epoch",
+     "before": -0.1298798367381096,
+     "after": -0.11393255448589722,
+     "minutes": 86.7,
+     "min_per_unit": 8.67
+    },
+    {
+     "ts": "2026-10-02 16:24:29",
+     "model": "cyclegan_s2w",
+     "at": 30,
+     "unit": "epoch",
+     "before": -0.11393255448589722,
+     "after": -0.1049233422925075,
+     "minutes": 287.9,
+     "min_per_unit": 28.79
+    }
+   ],
+   "stops": [],
+   "floor_hits": [],
+   "failures": 1
+  },
+  "pix2pix_facades_l1": {
+   "id": "pix2pix_facades_l1",
+   "label": "pix2pix facades, L1 only (no adversarial loss)",
+   "unit": "epochs",
+   "ceiling": 200,
+   "chunk_size": 200,
+   "reached": 200,
+   "done": true,
+   "stopped_early": false,
+   "metric": 13.613217449188232,
+   "minutes": 191.4,
+   "n_chunks": 1,
+   "chunks": [
+    {
+     "ts": "2026-10-03 11:38:03",
+     "model": "pix2pix_facades_l1",
+     "at": 200,
+     "unit": "epoch",
+     "before": null,
+     "after": 13.613217449188232,
+     "minutes": 191.4,
+     "min_per_unit": 0.96
+    }
+   ],
+   "stops": [],
+   "floor_hits": [],
+   "failures": 0
+  },
+  "cyclegan_h2z": {
+   "id": "cyclegan_h2z",
+   "label": "CycleGAN horse<->zebra",
+   "unit": "epochs",
+   "ceiling": 100,
+   "chunk_size": 10,
+   "reached": 0,
+   "done": false,
+   "stopped_early": false,
+   "metric": null,
+   "minutes": 0,
+   "n_chunks": 0,
+   "chunks": [],
+   "stops": [],
+   "floor_hits": [],
+   "failures": 0
+  },
+  "docshadow": {
+   "id": "docshadow",
+   "label": "DocShadow-SD7K (document shadow removal)",
+   "unit": "epochs",
+   "ceiling": 120,
+   "chunk_size": 10,
+   "reached": 56,
+   "done": true,
+   "stopped_early": true,
+   "metric": 30.49227809650383,
+   "minutes": 123.9,
+   "n_chunks": 2,
+   "chunks": [
+    {
+     "ts": "2026-10-03 05:09:50",
+     "model": "docshadow",
+     "at": 40,
+     "unit": "epoch",
+     "before": null,
+     "after": 29.200383036361952,
+     "minutes": 45.9,
+     "min_per_unit": 4.59
+    },
+    {
+     "ts": "2026-10-03 06:28:13",
+     "model": "docshadow",
+     "at": 50,
+     "unit": "epoch",
+     "before": 29.200383036361952,
+     "after": 30.025194189053483,
+     "minutes": 78.0,
+     "min_per_unit": 7.8
+    }
+   ],
+   "stops": [],
+   "floor_hits": [],
+   "failures": 0
+  },
+  "gfpgan": {
+   "id": "gfpgan",
+   "label": "GFPGANv1 (generator-only)",
+   "unit": "steps",
+   "ceiling": 15000,
+   "chunk_size": 5000,
+   "reached": 15000,
+   "done": true,
+   "stopped_early": false,
+   "metric": null,
+   "minutes": 134.2,
+   "n_chunks": 4,
+   "chunks": [
+    {
+     "ts": "2026-09-26 22:34:41",
+     "model": "gfpgan",
+     "at": 5000,
+     "unit": "step",
+     "before": null,
+     "after": null,
+     "minutes": 82.3,
+     "min_per_unit": 0.03
+    },
+    {
+     "ts": "2026-09-26 22:53:19",
+     "model": "gfpgan",
+     "at": 7500,
+     "unit": "step",
+     "before": null,
+     "after": null,
+     "minutes": 18.6,
+     "min_per_unit": 0.01
+    },
+    {
+     "ts": "2026-09-26 23:08:30",
+     "model": "gfpgan",
+     "at": 10000,
+     "unit": "step",
+     "before": null,
+     "after": null,
+     "minutes": 15.2,
+     "min_per_unit": 0.01
+    },
+    {
+     "ts": "2026-09-26 23:26:39",
+     "model": "gfpgan",
+     "at": 12500,
+     "unit": "step",
+     "before": null,
+     "after": null,
+     "minutes": 18.1,
+     "min_per_unit": 0.01
+    }
+   ],
+   "stops": [],
+   "floor_hits": [],
+   "failures": 1
+  },
+  "defect_localisation": {
+   "id": "defect_localisation",
+   "label": "DiscriminativeSubNetwork (scratch)",
+   "unit": "epochs",
+   "ceiling": 120,
+   "chunk_size": 10,
+   "reached": 120,
+   "done": true,
+   "stopped_early": false,
+   "metric": null,
+   "minutes": 0,
+   "n_chunks": 0,
+   "chunks": [],
+   "stops": [],
+   "floor_hits": [],
+   "failures": 0
+  },
+  "colourisation": {
+   "id": "colourisation",
+   "label": "ColourNet (scratch)",
+   "unit": "epochs",
+   "ceiling": 120,
+   "chunk_size": 10,
+   "reached": 100,
+   "done": true,
+   "stopped_early": true,
+   "metric": 22.267055584580298,
+   "minutes": 119.6,
+   "n_chunks": 17,
+   "chunks": [
+    {
+     "ts": "2026-09-27 16:54:03",
+     "model": "colourisation",
+     "at": 15,
+     "unit": "epoch",
+     "before": 21.623160341821517,
+     "after": 21.8288367144199,
+     "minutes": 6.9,
+     "min_per_unit": 1.38
+    },
+    {
+     "ts": "2026-09-27 17:01:07",
+     "model": "colourisation",
+     "at": 20,
+     "unit": "epoch",
+     "before": 21.8288367144199,
+     "after": 21.957699542136854,
+     "minutes": 7.0,
+     "min_per_unit": 1.41
+    },
+    {
+     "ts": "2026-09-27 17:08:14",
+     "model": "colourisation",
+     "at": 25,
+     "unit": "epoch",
+     "before": 21.957699542136854,
+     "after": 21.96148250592662,
+     "minutes": 7.1,
+     "min_per_unit": 1.42
+    },
+    {
+     "ts": "2026-09-27 17:15:20",
+     "model": "colourisation",
+     "at": 30,
+     "unit": "epoch",
+     "before": 21.96148250592662,
+     "after": 22.065553132030814,
+     "minutes": 7.1,
+     "min_per_unit": 1.42
+    },
+    {
+     "ts": "2026-09-27 17:22:25",
+     "model": "colourisation",
+     "at": 35,
+     "unit": "epoch",
+     "before": 22.065553132030814,
+     "after": 22.09403541534811,
+     "minutes": 7.1,
+     "min_per_unit": 1.42
+    },
+    {
+     "ts": "2026-09-27 17:29:31",
+     "model": "colourisation",
+     "at": 40,
+     "unit": "epoch",
+     "before": 22.09403541534811,
+     "after": 22.140528352597162,
+     "minutes": 7.1,
+     "min_per_unit": 1.42
+    },
+    {
+     "ts": "2026-09-27 17:36:36",
+     "model": "colourisation",
+     "at": 45,
+     "unit": "epoch",
+     "before": 22.140528352597162,
+     "after": 22.18119524564604,
+     "minutes": 7.1,
+     "min_per_unit": 1.42
+    },
+    {
+     "ts": "2026-09-27 17:43:42",
+     "model": "colourisation",
+     "at": 50,
+     "unit": "epoch",
+     "before": 22.18119524564604,
+     "after": 22.20616452637561,
+     "minutes": 7.1,
+     "min_per_unit": 1.42
+    },
+    {
+     "ts": "2026-09-27 17:50:45",
+     "model": "colourisation",
+     "at": 55,
+     "unit": "epoch",
+     "before": 22.20616452637561,
+     "after": 22.231752640447095,
+     "minutes": 7.0,
+     "min_per_unit": 1.41
+    },
+    {
+     "ts": "2026-09-27 17:59:05",
+     "model": "colourisation",
+     "at": 60,
+     "unit": "epoch",
+     "before": 22.246539368956164,
+     "after": 22.246539368956164,
+     "minutes": 0.8,
+     "min_per_unit": 0.17
+    },
+    {
+     "ts": "2026-09-27 18:53:05",
+     "model": "colourisation",
+     "at": 65,
+     "unit": "epoch",
+     "before": 22.246539368956164,
+     "after": 22.246539368956164,
+     "minutes": 6.9,
+     "min_per_unit": 1.39
+    },
+    {
+     "ts": "2026-09-27 19:00:04",
+     "model": "colourisation",
+     "at": 70,
+     "unit": "epoch",
+     "before": 22.246539368956164,
+     "after": 22.246539368956164,
+     "minutes": 7.0,
+     "min_per_unit": 1.4
+    },
+    {
+     "ts": "2026-09-27 19:10:44",
+     "model": "colourisation",
+     "at": 75,
+     "unit": "epoch",
+     "before": 22.246539368956164,
+     "after": 22.263461528676952,
+     "minutes": 6.9,
+     "min_per_unit": 1.39
+    },
+    {
+     "ts": "2026-09-27 19:17:43",
+     "model": "colourisation",
+     "at": 80,
+     "unit": "epoch",
+     "before": 22.263461528676952,
+     "after": 22.263461528676952,
+     "minutes": 7.0,
+     "min_per_unit": 1.4
+    },
+    {
+     "ts": "2026-09-27 19:33:46",
+     "model": "colourisation",
+     "at": 90,
+     "unit": "epoch",
+     "before": 22.263461528676952,
+     "after": 22.267055584580298,
+     "minutes": 13.5,
+     "min_per_unit": 1.35
+    },
+    {
+     "ts": "2026-09-27 19:46:24",
+     "model": "colourisation",
+     "at": 95,
+     "unit": "epoch",
+     "before": 22.267055584580298,
+     "after": 22.267055584580298,
+     "minutes": 7.0,
+     "min_per_unit": 1.4
+    },
+    {
+     "ts": "2026-09-27 19:53:26",
+     "model": "colourisation",
+     "at": 100,
+     "unit": "epoch",
+     "before": 22.267055584580298,
+     "after": 22.267055584580298,
+     "minutes": 7.0,
+     "min_per_unit": 1.41
+    }
+   ],
+   "stops": [],
+   "floor_hits": [],
+   "failures": 3
+  },
+  "pix2pix_maps": {
+   "id": "pix2pix_maps",
+   "label": "pix2pix maps",
+   "unit": "epochs",
+   "ceiling": 200,
+   "chunk_size": 200,
+   "reached": 200,
+   "done": true,
+   "stopped_early": false,
+   "metric": 14.933657201131185,
+   "minutes": 219.2,
+   "n_chunks": 1,
+   "chunks": [
+    {
+     "ts": "2026-09-27 03:27:22",
+     "model": "pix2pix_maps",
+     "at": 200,
+     "unit": "epoch",
+     "before": null,
+     "after": 14.933657201131185,
+     "minutes": 219.2,
+     "min_per_unit": 1.1
+    }
+   ],
+   "stops": [],
+   "floor_hits": [],
+   "failures": 0
+  },
+  "pix2pix_facades": {
+   "id": "pix2pix_facades",
+   "label": "pix2pix facades",
+   "unit": "epochs",
+   "ceiling": 200,
+   "chunk_size": 200,
+   "reached": 200,
+   "done": true,
+   "stopped_early": false,
+   "metric": 12.697318315505981,
+   "minutes": 113.3,
+   "n_chunks": 6,
+   "chunks": [
+    {
+     "ts": "2026-09-26 18:59:29",
+     "model": "pix2pix_facades",
+     "at": 6,
+     "unit": "epoch",
+     "before": null,
+     "after": null,
+     "minutes": 2.8,
+     "min_per_unit": 0.57
+    },
+    {
+     "ts": "2026-09-26 19:06:12",
+     "model": "pix2pix_facades",
+     "at": 11,
+     "unit": "epoch",
+     "before": 13.115456994374593,
+     "after": 12.624327659606934,
+     "minutes": 4.5,
+     "min_per_unit": 0.89
+    },
+    {
+     "ts": "2026-09-26 19:13:00",
+     "model": "pix2pix_facades",
+     "at": 16,
+     "unit": "epoch",
+     "before": 12.624327659606934,
+     "after": 12.257376352945963,
+     "minutes": 6.1,
+     "min_per_unit": 1.21
+    },
+    {
+     "ts": "2026-09-26 19:20:45",
+     "model": "pix2pix_facades",
+     "at": 21,
+     "unit": "epoch",
+     "before": 12.257376352945963,
+     "after": 12.569285535812378,
+     "minutes": 7.7,
+     "min_per_unit": 1.54
+    },
+    {
+     "ts": "2026-09-26 19:38:36",
+     "model": "pix2pix_facades",
+     "at": 40,
+     "unit": "epoch",
+     "before": 12.569285535812378,
+     "after": 12.731500498453777,
+     "minutes": 10.1,
+     "min_per_unit": 0.25
+    },
+    {
+     "ts": "2026-09-27 04:49:28",
+     "model": "pix2pix_facades",
+     "at": 200,
+     "unit": "epoch",
+     "before": 12.731500498453777,
+     "after": 12.697318315505981,
+     "minutes": 82.1,
+     "min_per_unit": 0.41
+    }
+   ],
+   "stops": [],
+   "floor_hits": [],
+   "failures": 0
+  }
+ }
+}
