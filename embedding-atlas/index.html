@@ -46,7 +46,11 @@
   .tip{position:fixed;pointer-events:none;opacity:0;transition:opacity .08s;z-index:9;
     background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:7px;
     box-shadow:0 8px 26px rgba(0,0,0,.16)}
-  .tip img{display:block;width:104px;height:104px;object-fit:cover;border-radius:6px}
+  /* One sprite sheet rather than 1,800 files: 1,800 uploads blew past the deploy
+     timeout, and hovering across the plot would have been 1,800 HTTP requests.
+     background-position picks the tile, scaled up from 72px to 104px. */
+  .tip .thumb{display:block;width:104px;height:104px;border-radius:6px;
+    background-image:url("sprite.jpg");background-repeat:no-repeat}
   .tip span{display:block;font-size:11.5px;color:var(--t2);margin-top:5px;text-align:center}
   .foot{margin-top:48px;padding-top:16px;border-top:1px solid var(--bd);font-size:13px;color:var(--t3)}
 </style>
@@ -102,7 +106,7 @@
   </p>
 </div>
 
-<div class="tip" id="tip"><img id="tipimg" alt=""><span id="tiplab"></span></div>
+<div class="tip" id="tip"><span class="thumb" id="tipimg"></span><span id="tiplab"></span></div>
 <script src="atlas.js"></script>
 <script>
 (function () {
@@ -155,7 +159,11 @@
     }
     c.style.cursor = "pointer";
     c.addEventListener("mouseenter", function (e) {
-      ti.src = "thumbs/" + p.t;
+      // Scale the 72px tile to the 104px swatch, then offset to this point's cell.
+      var sp = A.sprite, k = 104 / sp.tile;
+      ti.style.backgroundSize = (sp.cols * 104) + "px " + (sp.rows * 104) + "px";
+      ti.style.backgroundPosition =
+        (-(p.i % sp.cols) * 104) + "px " + (-Math.floor(p.i / sp.cols) * 104) + "px";
       tl.textContent = p.d;
       tip.style.opacity = 1;
       var r = c.getBoundingClientRect();
